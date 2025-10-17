@@ -67,4 +67,26 @@ class HistoryDB {
     }
 }
 
+Class UsersDB {
+    private $connection;
+
+    // Constructor receives an existing PDO connection
+    public function __construct($connection) {
+        $this->connection =$connection; 
+    }
+
+    // Retrieves all users sorted by last name
+    public function getAllUsers() {
+        $sql = "SELECT id, firstname, lastname, city, country, email 
+        FROM users 
+        ORDER BY lastname ASC ";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+        
+    }
+}
+
+
+
 ?>

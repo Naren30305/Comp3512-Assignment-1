@@ -111,6 +111,23 @@ body{
     transition: background 0.2s ease-in-out;
   }
 
+  /* === Portfolio Button === */
+.portfolio-btn {
+  display: inline-block;
+  background: #1f64ff;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.portfolio-btn:hover {
+  background: #3e7aff;
+  transform: translateY(-2px);
+}
+
 /* ========== Utilities ========== */
 .muted{ color: var(--muted); }
 .link{ color: var(--link); }

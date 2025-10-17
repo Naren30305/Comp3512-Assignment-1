@@ -62,7 +62,6 @@ try {
 </head>
 <body>
   <?php include __DIR__ . '/includes/header.inc.php'; ?>
-
   <div class="container">
     <h1 class="page-title">
       <?php echo htmlspecialchars($company['name']); ?>
