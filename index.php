@@ -57,9 +57,9 @@ try {
             echo '<td>' . htmlspecialchars($user['country']) . '</td>';
             echo '<td>' . htmlspecialchars($user['email']) . '</td>';
     
-            // 🔗 Add a Portfolio button that links to portfolio.php
+            // Add a Portfolio button that links to portfolio.php
             echo '<td>
-                    <a class="portfolio-btn" href="portfolio.php?userid=' . urlencode($user['id']) . '">
+                    <a class="portfolio-btn" href="portfolio.php?userid=' . $user['id'] . '">
                         View Portfolio
                     </a>
                   </td>';
