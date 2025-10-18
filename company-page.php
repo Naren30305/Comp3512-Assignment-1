@@ -61,7 +61,7 @@ try {
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <?php include __DIR__ . '/includes/header.inc.php'; ?>
+  <?php include '/includes/header.inc.php'; ?>
   <div class="container">
     <h1 class="page-title">
       <?php echo htmlspecialchars($company['name']); ?>

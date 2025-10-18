@@ -87,6 +87,33 @@ Class UsersDB {
     }
 }
 
+class PortfolioDB {
+    private $connection;
+
+    public function __construct($connection) {
+        $this->connection = $connection;
+    }
+
+    // Get a user's portfolio with company details and latest closing price
+    public function getPortfolioByUser($userid) {
+        $sql = "
+            SELECT p.symbol, p.amount, c.name, c.sector, h.close
+            FROM portfolio p
+            JOIN companies c ON p.symbol = c.symbol
+            JOIN history h ON p.symbol = h.symbol
+            WHERE p.userid = :userid
+            AND h.date = (
+                SELECT MAX(date) FROM history WHERE symbol = p.symbol
+            )
+            ORDER BY c.name ASC
+        ";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':userid', $userid);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+}
 
 
 ?>
