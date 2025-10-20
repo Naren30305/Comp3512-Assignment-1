@@ -21,7 +21,7 @@ try {
     $company = $companiesDB->getCompanyBySymbol($symbol);
     $history = $historyDB->getHistoryBySymbol($symbol);
 
-      // Compute summary statistics based on the history data.
+    // Compute summary statistics based on the history data.
     $summary = [
         'high' => null,
         'low' => null,
@@ -35,10 +35,10 @@ try {
         $lows = array_column($history, 'low');
         $volumes = array_column($history, 'volume');
 
-         // Calculate summary statistics.
+        // Calculate summary statistics.
         $summary['high'] = max($highs);
         $summary['low'] = min($lows);
-        $summary['totalVolume'] = array_sum($volumes); //Cited from https://www.w3schools.com/php/func_array_sum.asp
+        $summary['totalVolume'] = array_sum($volumes);
         $summary['avgVolume'] = $summary['totalVolume'] / count($volumes);
     }
 
@@ -55,8 +55,8 @@ try {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    <?php echo htmlspecialchars($company['name']); ?>
-    (<?php echo htmlspecialchars($company['symbol']); ?>)
+    <?php echo $company['name']; ?>
+    (<?php echo $company['symbol']; ?>)
   </title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -64,14 +64,13 @@ try {
   <?php include '/includes/header.inc.php'; ?>
   <div class="container">
     <h1 class="page-title">
-      <?php echo htmlspecialchars($company['name']); ?>
-      (<?php echo htmlspecialchars($company['symbol']); ?>)
+      <?php echo $company['name']; ?>
+      (<?php echo $company['symbol']; ?>)
     </h1>
 
     <?php
-    
     if (!empty($company['description'])) {
-        echo '<p class="page-sub">' . htmlspecialchars($company['description']) . '</p>';
+        echo '<p class="page-sub">' . $company['description'] . '</p>';
     }
     ?>
 
@@ -82,23 +81,22 @@ try {
         <h2>Details</h2>
         <hr class="hr">
         <div class="kv">
-          <div>Sector</div><div><?php echo htmlspecialchars($company['sector']); ?></div>
-          <div>Subindustry</div><div><?php echo htmlspecialchars($company['subindustry']); ?></div>
-          <div>Exchange</div><div><?php echo htmlspecialchars($company['exchange']); ?></div>
-          <div>Address</div><div><?php echo htmlspecialchars($company['address']); ?></div>
+          <div>Sector</div><div><?php echo $company['sector']; ?></div>
+          <div>Subindustry</div><div><?php echo $company['subindustry']; ?></div>
+          <div>Exchange</div><div><?php echo $company['exchange']; ?></div>
+          <div>Address</div><div><?php echo $company['address']; ?></div>
           <div>Website</div>
           <div>
             <?php
-            // If the company has a website, display it as a clickable link.
             if (!empty($company['website'])) {
-                echo '<a class="link" href="' . htmlspecialchars($company['website']) .
+                echo '<a class="link" href="' . $company['website'] .
                      '" target="_blank" rel="noopener">' .
-                     htmlspecialchars($company['website']) . '</a>';
+                     $company['website'] . '</a>';
             }
             ?>
           </div>
-          <div>Latitude</div><div><?php echo htmlspecialchars($company['latitude']); ?></div>
-          <div>Longitude</div><div><?php echo htmlspecialchars($company['longitude']); ?></div>
+          <div>Latitude</div><div><?php echo $company['latitude']; ?></div>
+          <div>Longitude</div><div><?php echo $company['longitude']; ?></div>
         </div>
       </section>
 
@@ -119,11 +117,11 @@ try {
                     <tbody>';
             for ($i = 0; $i < $finLen; $i++) {
                 echo '<tr>';
-                echo '<td>' . htmlspecialchars($fin['years'][$i]) . '</td>';
-                echo '<td>' . htmlspecialchars(number_format((float)$fin['revenue'][$i])) . '</td>';
-                echo '<td>' . htmlspecialchars(number_format((float)$fin['earnings'][$i])) . '</td>';
-                echo '<td>' . htmlspecialchars(number_format((float)$fin['assets'][$i])) . '</td>';
-                echo '<td>' . htmlspecialchars(number_format((float)$fin['liabilities'][$i])) . '</td>';
+                echo '<td>' . $fin['years'][$i] . '</td>';
+                echo '<td>' . number_format((float)$fin['revenue'][$i]) . '</td>';
+                echo '<td>' . number_format((float)$fin['earnings'][$i]) . '</td>';
+                echo '<td>' . number_format((float)$fin['assets'][$i]) . '</td>';
+                echo '<td>' . number_format((float)$fin['liabilities'][$i]) . '</td>';
                 echo '</tr>';
             }
             echo '</tbody></table>';
@@ -133,7 +131,6 @@ try {
 
       <!-- Summary Stats Card -->
       <?php
-        // Only show summary stats if the company has any history data.
       if ($history && count($history) > 0) {
           echo '<section class="card summary-card">
                   <h2>Summary Statistics</h2>
@@ -157,11 +154,9 @@ try {
         <h2>Price History (Descending by date)</h2>
         <hr class="hr">
         <?php
-        // Check if there is any historical data.
         if (!$history) {
             echo '<p class="muted">No history rows found.</p>';
         } else {
-            // Display the stock history
             echo '<table class="table">
                     <thead>
                       <tr>
@@ -169,10 +164,9 @@ try {
                       </tr>
                     </thead>
                     <tbody>';
-            // Loop through each row of data and display its values.
             foreach ($history as $row) {
                 echo '<tr>';
-                echo '<td>' . htmlspecialchars($row['date']) . '</td>';
+                echo '<td>' . $row['date'] . '</td>';
                 echo '<td>' . number_format((float)$row['open'], 2) . '</td>';
                 echo '<td>' . number_format((float)$row['close'], 2) . '</td>';
                 echo '<td>' . number_format((float)$row['high'], 2) . '</td>';

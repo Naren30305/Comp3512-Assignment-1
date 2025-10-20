@@ -2,7 +2,6 @@
 require_once 'includes/config.inc.php';
 require_once 'db-classes.php';
 
-
 // Get user ID from the query string
 if (isset($_GET['userid'])) {
     $userid = $_GET['userid']; 
@@ -65,7 +64,7 @@ try {
     // If the user exists
     if ($user) {
         // Display the user's full name as the page title
-        echo '<h1 class="page-title">' . htmlspecialchars($user['firstname']) . ' ' . htmlspecialchars($user['lastname']) . '\'s Portfolio</h1>';
+        echo '<h1 class="page-title">' . $user['firstname'] . ' ' . $user['lastname'] . '\'s Portfolio</h1>';
 
         // Portfolio Summary Section
         echo '<section class="card summary-card">';
@@ -102,11 +101,11 @@ try {
                 echo '<tr>';
                 // Symbol link to company page
                 echo '<td><a href="company-page.php?symbol=' . urlencode($item['symbol']) . '" class="link">'
-                     . htmlspecialchars($item['symbol']) . '</a></td>';
+                     . $item['symbol'] . '</a></td>';
                 // Company name link to company page
                 echo '<td><a href="company-page.php?symbol=' . urlencode($item['symbol']) . '" class="link">'
-                     . htmlspecialchars($item['name']) . '</a></td>';
-                echo '<td>' . htmlspecialchars($item['sector']) . '</td>';
+                     . $item['name'] . '</a></td>';
+                echo '<td>' . $item['sector'] . '</td>';
                 echo '<td>' . number_format((float)$item['amount']) . '</td>';
                 echo '<td>$' . number_format((float)$value, 2) . '</td>';
                 echo '</tr>';

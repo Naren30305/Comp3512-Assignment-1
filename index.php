@@ -51,17 +51,17 @@ try {
     
         foreach ($users as $user) { 
             echo '<tr>';
-            echo '<td>' . htmlspecialchars($user['lastname']) . '</td>';
-            echo '<td>' . htmlspecialchars($user['firstname']) . '</td>';
-            echo '<td>' . htmlspecialchars($user['city']) . '</td>';
-            echo '<td>' . htmlspecialchars($user['country']) . '</td>';
-            echo '<td>' . htmlspecialchars($user['email']) . '</td>';
+            echo '<td>' . $user['lastname'] . '</td>';
+            echo '<td>' . $user['firstname'] . '</td>';
+            echo '<td>' . $user['city'] . '</td>';
+            echo '<td>' . $user['country'] . '</td>';
+            echo '<td>' . $user['email'] . '</td>';
     
             // Portfolio button link with userid as query string
             echo '<td>
             <a class="portfolio-btn" href="portfolio.php?userid=' . ($user['id']) . '"> View Portfolio</a></td>';
             echo '</tr>';
-}
+        }
     
         echo '</tbody>';
         echo '</table>';
@@ -69,7 +69,6 @@ try {
     } else { 
         echo '<p>No customers found in database.</p>';
     }
-
     ?>
 
     </div>
