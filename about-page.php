@@ -7,7 +7,7 @@ require_once __DIR__ . '/db-classes.php';  // optional if you want to reuse Data
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>About | COMP 3512 Assignment 1</title>
+    <title>About</title>
     <!-- Keep CSS path consistent with other pages -->
     <link rel="stylesheet" href="css/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,7 +16,6 @@ require_once __DIR__ . '/db-classes.php';  // optional if you want to reuse Data
 <div class="container">
 
     <?php
-    // Include header INSIDE the body so markup is valid
     include __DIR__ . '/includes/header.inc.php';
     ?>
 
