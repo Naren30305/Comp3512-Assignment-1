@@ -65,7 +65,7 @@ require_once __DIR__ . '/db-classes.php';  // optional if you want to reuse Data
     echo "<h2>Database Connection</h2>";
 
     try {
-        // Prefer using your helper + config for consistency
+       
         $pdo = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
         echo "<p>Connected successfully to <strong>stocks.db</strong>.</p>";
 
@@ -73,14 +73,6 @@ require_once __DIR__ . '/db-classes.php';  // optional if you want to reuse Data
         $countCompanies = $pdo->query("SELECT COUNT(*) FROM companies")->fetchColumn();
         echo "<p>Companies in database: <strong>" . (int)$countCompanies . "</strong></p>";
 
-        // (Optional) show other counts too
-        $countUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
-        $countHistory = $pdo->query("SELECT COUNT(*) FROM history")->fetchColumn();
-        $countPortfolio = $pdo->query("SELECT COUNT(*) FROM portfolio")->fetchColumn();
-
-        echo "<p>Users: <strong>" . (int)$countUsers . "</strong> | "
-           . "History rows: <strong>" . (int)$countHistory . "</strong> | "
-           . "Portfolio rows: <strong>" . (int)$countPortfolio . "</strong></p>";
 
         $pdo = null; // close connection
     } catch (Throwable $e) {
