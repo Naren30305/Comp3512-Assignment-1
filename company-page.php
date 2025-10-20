@@ -61,7 +61,7 @@ try {
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <?php include '/includes/header.inc.php'; ?>
+  <?php include __DIR__ . '/includes/header.inc.php'; ?>
   <div class="container">
     <h1 class="page-title">
       <?php echo $company['name']; ?>
@@ -100,34 +100,6 @@ try {
         </div>
       </section>
 
-      <!-- Financials Card -->
-      <section class="card">
-        <h2>Financials</h2>
-        <hr class="hr">
-        <?php
-        if (!$fin || $finLen === 0) {
-            echo '<p class="muted">No financials available.</p>';
-        } else {
-            echo '<table class="table">
-                    <thead>
-                      <tr>
-                        <th>Year</th><th>Revenue</th><th>Earnings</th><th>Assets</th><th>Liabilities</th>
-                      </tr>
-                    </thead>
-                    <tbody>';
-            for ($i = 0; $i < $finLen; $i++) {
-                echo '<tr>';
-                echo '<td>' . $fin['years'][$i] . '</td>';
-                echo '<td>' . number_format((float)$fin['revenue'][$i]) . '</td>';
-                echo '<td>' . number_format((float)$fin['earnings'][$i]) . '</td>';
-                echo '<td>' . number_format((float)$fin['assets'][$i]) . '</td>';
-                echo '<td>' . number_format((float)$fin['liabilities'][$i]) . '</td>';
-                echo '</tr>';
-            }
-            echo '</tbody></table>';
-        }
-        ?>
-      </section>
 
       <!-- Summary Stats Card -->
       <?php
