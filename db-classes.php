@@ -22,6 +22,16 @@ Class CompaniesDB {
         $this->connection = $connection;
     }
 
+    /**Retreive all companies sorted by name  */
+    public function getAllCompanies(): array
+    {
+        $sql = "SELECT symbol, name, sector, subindustry, address, exchange,
+                       website, description, latitude, longitude, financials
+                FROM companies
+                ORDER BY name ASC";
+        return $this->connection->query($sql)->fetchAll();
+    }
+
     // Retrieves a single company record based on symbol
     public function getCompanyBySymbol($symbol) {
         $sql = "
@@ -85,6 +95,8 @@ Class UsersDB {
         return $statement->fetchAll();
         
     }
+
+
 }
 
 class PortfolioDB {
@@ -113,7 +125,8 @@ class PortfolioDB {
         $statement->execute();
         return $statement->fetchAll();
     }
-}
 
+    
+}
 
 ?>
