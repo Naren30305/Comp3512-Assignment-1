@@ -100,10 +100,10 @@ try {
 
                 echo '<tr>';
                 // Symbol link to company page
-                echo '<td><a href="company-page.php?symbol=' . urlencode($item['symbol']) . '" class="link">'
+                echo '<td><a href="company-page.php?symbol=' . $item['symbol'] . '" class="link">'
                      . $item['symbol'] . '</a></td>';
                 // Company name link to company page
-                echo '<td><a href="company-page.php?symbol=' . urlencode($item['symbol']) . '" class="link">'
+                echo '<td><a href="company-page.php?symbol=' . $item['symbol'] . '" class="link">'
                      . $item['name'] . '</a></td>';
                 echo '<td>' . $item['sector'] . '</td>';
                 echo '<td>' . number_format((float)$item['amount']) . '</td>';
