@@ -31,23 +31,6 @@ require_once __DIR__ . '/db-classes.php';
         </ul>
     </div>
 
-    <?php
- 
-    echo "<div class='card stack'>";
-    echo "<h2>Database Connection Test</h2>";
-
-    try {
-        // Connect using helper and constants from config file
-        $connection = DatabaseHelper::createConnection([DBCONNSTRING, DBUSER, DBPASS]);
-        echo "<p>Connected successfully to <strong>stocks.db</strong>.</p>";
-
-    } catch (PDOException $e) {
-        echo "<p><strong>Error:</strong> " . $e->getMessage() . "</p>";
-       
-    }
-
-    echo "</div>";
-    ?>
 
 </div>
 </body>

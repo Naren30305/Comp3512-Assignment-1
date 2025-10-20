@@ -58,28 +58,6 @@ require_once __DIR__ . '/db-classes.php';  // optional if you want to reuse Data
         </p>
     </div>
 
-    <?php
-    // Live database info section (use the same connection approach as the rest of the site)
-    echo "<div class='card stack'>";
-    echo "<h2>Database Connection</h2>";
-
-    try {
-       
-        $pdo = DatabaseHelper::createConnection(array(DBCONNSTRING, DBUSER, DBPASS));
-        echo "<p>Connected successfully to <strong>stocks.db</strong>.</p>";
-
-        // Count total companies (table name from your schema)
-        $countCompanies = $pdo->query("SELECT COUNT(*) FROM companies")->fetchColumn();
-        echo "<p>Companies in database: <strong>" . (int)$countCompanies . "</strong></p>";
-
-
-        $pdo = null; // close connection
-    } catch (Throwable $e) {
-        echo "<p><strong>Database Error:</strong> " . $e->getMessage() . "</p>";
-    }
-
-    echo "</div>";
-    ?>
 
 </div>
 </body>
