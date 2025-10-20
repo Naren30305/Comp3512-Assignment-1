@@ -58,6 +58,7 @@ class HistoryDB {
     public function __construct($connection) {
         $this->connection = $connection;
     }
+    
 
     // Retrieves all history records for a given company symbol
     public function getHistoryBySymbol($symbol) {
@@ -73,6 +74,20 @@ class HistoryDB {
         $statement->execute();
 
         // Fetch all rows as an array
+        return $statement->fetchAll();
+    }
+
+    /** (API) History oldest -> newest (ASC) */
+    public function getHistoryBySymbolAsc($symbol) {
+        $sql = "
+            SELECT date, open, close, high, low, volume
+            FROM history
+            WHERE symbol = :symbol COLLATE NOCASE
+            ORDER BY date ASC
+        ";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':symbol', $symbol);
+        $statement->execute();
         return $statement->fetchAll();
     }
 }
@@ -126,7 +141,27 @@ class PortfolioDB {
         return $statement->fetchAll();
     }
 
-    
+    // recordCount, totalShares, totalValue 
+    public function getPortfolioSummaryByUser($userid) {
+        $rows = $this->getPortfolioByUser($userid);
+
+        $summary = [
+            'recordCount' => 0,
+            'totalShares' => 0,
+            'totalValue'  => 0.0
+        ];
+
+        foreach ($rows as $r) {
+            $summary['recordCount'] += 1;
+            $summary['totalShares'] += (float)$r['amount'];
+            $summary['totalValue']  += ((float)$r['amount']) * ((float)$r['close']);
+        }
+
+        // Round total value for stable display/API output
+        $summary['totalValue'] = round($summary['totalValue'], 2);
+
+        return $summary;
+    }
 }
 
 ?>
