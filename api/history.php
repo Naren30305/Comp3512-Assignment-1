@@ -1,6 +1,6 @@
 <?php
 // /api/history.php
-header('Content-Type: application/json; charset=utf-8');
+header('Content-Type: application/json');
 
 require_once __DIR__ . '/../includes/config.inc.php';
 require_once __DIR__ . '/../db-classes.php';

@@ -111,7 +111,22 @@ Class UsersDB {
         
     }
 
+    /** Retrieve a single user by id (or null if not found) */
+    public function getUserById($id) {
+        $sql = "SELECT id, firstname, lastname, city, country, email
+                FROM users
+                WHERE id = :id";
+        $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+        $row = $statement->fetch();
 
+        if ($row) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
 }
 
 class PortfolioDB {

@@ -8,6 +8,7 @@ try {
     $connection = DatabaseHelper::createConnection([DBCONNSTRING, DBUSER, DBPASS]);
     $companiesDB = new CompaniesDB($connection);
 
+    //Check if the 'ref' (symbol) query parameter is provided in the URL
     if (isset($_GET['ref']) && trim($_GET['ref']) !== '') {
         $symbol = trim($_GET['ref']);
         $company = $companiesDB->getCompanyBySymbol($symbol);
